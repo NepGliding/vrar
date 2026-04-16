@@ -1,0 +1,64 @@
+project-root/
+├── .github/
+│   └── workflows/
+│       └── main.yml                # Github Actions工作流（含部署、索引生成和 JSON 校验）
+├── public/
+│   ├── article/                    # 存放所有 Markdown 文件，按类别分子文件夹
+│   │   ├── software/               # 软件类文章
+│   │   │   ├── xxx.md
+│   │   │   └── ...
+│   │   ├── game/                   # 游戏类文章
+│   │   ├── system/                 # 操作系统类文章
+│   │   └── ...                     # 未来可新增其他类别
+│   ├── resource/                   # 存放各类资源的 JSON 文件
+│   │   ├── hardware.json
+│   │   ├── software.json
+│   │   ├── game.json
+│   │   ├── website.json
+│   │   └── system.json
+│   ├── article-index.json          # 自动生成的文章索引（不要手动编辑）
+│   └── favicon.ico                 # 站点图标
+├── scripts/                        # 构建/维护脚本（在本地和 GitHub Actions 中运行）
+│   ├── generate-article-index.ts   # node脚本（扫描 public/article/，生成 public/article-index.json）
+│   └── validate-resources.ts       # 校验 public/resource/*.json 是否符合预定义 schema
+├── src/
+│   ├── assets/                     # 需要经过 Vite 处理的静态资源（图片、全局 CSS 等） 
+│   │   ├── styles/
+│   │   │   ├── global.css          # 全局样式（重置、主题变量、文章渲染额外样式）
+│   │   │   └── markdown.css        # Markdown 渲染内容的专用样式（代码高亮、表格等）
+│   │   └── images/                 # 组件中用到的图片（可进一步分子目录）
+│   ├── components/                 # 可复用的 Vue 组件
+│   │   ├── layout/                 # 布局相关组件
+│   │   │   ├── AppHeader.vue       # 顶部栏
+│   │   │   ├── AppFooter.vue       # 页脚
+│   │   ├── common/                 # 通用组件（按钮、卡片、搜索框等）
+│   │   ├── article/                 # 文章相关组件
+│   │   │   ├── ArticleSidebarNav.vue    # 左侧导航：展示所有文章的分类和标题（基于索引）
+│   │   │   ├── ArticleContent.vue       # 中间内容：渲染当前文章的 Markdown
+│   │   │   ├── ArticleTOC.vue           # 右侧目录：基于当前文章标题生成
+│   │   │   └── MarkdownRenderer.vue     # 封装 markdown-it 渲染逻辑（被 ArticleContent 使用）
+│   │   └── resource/               # 资源页专用组件
+│   │       └── ResourceNavTabs.vue # 导航按钮（点击滚动到对应分类）
+│   │       ├── ResourceGroup.vue   # 单个分类的资源列表（含标题、卡片列表）
+│   │       └── ResourceCard.vue    # 资源卡片展示
+│   │       └── ResourceDetailModal.vue     # 资源详情弹窗
+│   ├── views/                      # 页面级组件（对应路由）
+│   │   ├── HomePage.vue            # 首页（展示最新文章、推荐资源等）
+│   │   ├── ArticlePage.vue         # 文章页实现三栏布局（左栏导航，中栏内容，右栏目录）
+│   │   ├── ResourcesPage.vue       # 资源总览页（栅格展示所有资源）
+│   │   └── AboutPage.vue           # 关于页
+│   ├── router/                     # Vue Router 配置
+│   │   └── index.ts
+│   ├── stores/                     # Pinia 状态管理（用于管理搜索关键词、主题等）
+│   ├── utils/                      # 工具函数
+│   │   ├── markdown.ts             # markdown-it 实例配置及高亮插件初始化
+│   │   ├── request.ts              # 封装 fetch（可添加缓存、错误处理）
+│   │   └── search.ts               # 前端搜索的辅助函数（关键词匹配）
+│   ├── App.vue                     # 根组件（配置 Naive UI 的 NConfigProvider 等）
+│   └── main.ts                     # 入口文件
+├── index.html                      # Vite 入口 HTML
+├── package.json                    # 依赖及脚本（需添加 predev、prebuild 等）
+├── vite.config.ts                  # Vite 配置（设置 base、别名、插件等）
+├── .gitignore                      # 忽略 node_modules、dist、article-index.json（该文件应被生成，不提交？建议提交索引避免首次构建缺失，但自动生成会覆盖）
+└── projectsTructure.txt.           # 项目结构
+└── README.md                       # 项目说明
