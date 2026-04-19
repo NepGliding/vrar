@@ -22,11 +22,11 @@ project-root/
 │   ├── generate-article-index.ts   # node脚本（扫描 public/article/，生成 public/article-index.json）
 │   └── validate-resources.ts       # 校验 public/resource/*.json 是否符合预定义 schema
 ├── src/
-│   ├── assets/                     # 需要经过 Vite 处理的静态资源（图片、全局 CSS 等） 
+│   ├── assets/                     # 需要经过 Vite 处理的静态资源
 │   │   ├── styles/
-│   │   │   ├── global.css          # 全局样式（重置、主题变量、文章渲染额外样式）
+│   │   │   ├── global.css          # 全局样式
 │   │   │   └── markdown.css        # Markdown 渲染内容的专用样式（代码高亮、表格等）
-│   │   └── images/                 # 组件中用到的图片（可进一步分子目录）
+│   │   └── images/                 # 组件中用到的图片
 │   ├── components/                 # 可复用的 Vue 组件
 │   │   ├── layout/                 # 布局相关组件
 │   │   │   ├── AppHeader.vue       # 顶部栏
@@ -38,15 +38,13 @@ project-root/
 │   │   │   ├── ArticleTOC.vue           # 右侧目录：基于当前文章标题生成
 │   │   │   └── MarkdownRenderer.vue     # 封装 markdown-it 渲染逻辑（被 ArticleContent 使用）
 │   │   └── resource/               # 资源页专用组件
-│   │       └── ResourceNavTabs.vue # 导航按钮（点击滚动到对应分类）
-│   │       ├── ResourceGroup.vue   # 单个分类的资源列表（含标题、卡片列表）
+│   │       └── ResourceNavTabs.vue # 导航栏
+│   │       ├── ResourceGroup.vue   # 单个分类的资源列表
 │   │       └── ResourceCard.vue    # 资源卡片展示
-│   │       └── ResourceDetailModal.vue     # 资源详情弹窗
 │   ├── views/                      # 页面级组件（对应路由）
-│   │   ├── HomePage.vue            # 首页（展示最新文章、推荐资源等）
 │   │   ├── ArticlePage.vue         # 文章页实现三栏布局（左栏导航，中栏内容，右栏目录）
 │   │   ├── ResourcesPage.vue       # 资源总览页（栅格展示所有资源）
-│   │   └── AboutPage.vue           # 关于页
+│   │   └── OtherPage.vue           # 其它页
 │   ├── router/                     # Vue Router 配置
 │   │   └── index.ts
 │   ├── stores/                     # Pinia 状态管理（用于管理搜索关键词、主题等）
